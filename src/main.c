@@ -6,34 +6,30 @@
 /*   By: cdric.b <cdric.b@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 10:17:02 by cdric.b           #+#    #+#             */
-/*   Updated: 2026/03/30 12:21:57 by cdric.b          ###   ########.fr       */
+/*   Updated: 2026/03/30 22:37:46 by cdric.b          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libip.h"
 
-uint16_t ft_htons_v1(uint16_t port)
+void ft_inet_pton_assert(void)
 {
-    uint16_t p3;
+    struct in_addr a;
 
-    p3 = 0;
-    p3 |= port >> 8;
-    p3 |= port << 8;
-    
-    return (p3);
+    assert(ft_inet_pton(AF_INET, "192.168.1.10", &a));
+    assert(ft_inet_pton(AF_INET, "0.0.0.0", &a));
+    assert(ft_inet_pton(AF_INET, "255.255.255.255", &a));
+    assert(!ft_inet_pton(AF_INET, "256.255.255.255", &a));
+    assert(!ft_inet_pton(AF_INET, "255.256.255.255", &a));
+    assert(!ft_inet_pton(AF_INET, "255.255.256.255", &a));
+    assert(!ft_inet_pton(AF_INET, "255.255.255.256", &a));
+    assert(!ft_inet_pton(AF_INET, "192.168.1.a", &a));
 }
-
-uint16_t ft_htons_v2(uint16_t port)
-{
-    return ((port >> 8) | (port << 8));
-}
-
-
 
 int main(void)
 {
-    uint16_t p = htons(9090);
-    assert(ft_htons_v1(9090) == p && p == ft_htons_v2(9090));
 
-    printf("byte order %d and %d\n", __BYTE_ORDER__, __ORDER_LITTLE_ENDIAN__);
+    ft_inet_pton_assert();
+    return (0);
+    
 }

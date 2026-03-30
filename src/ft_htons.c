@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_bit_32.c                                  :+:      :+:    :+:   */
+/*   ft_htons.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdric.b <cdric.b@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 18:50:44 by cw3l              #+#    #+#             */
-/*   Updated: 2026/03/30 12:55:31 by cdric.b          ###   ########.fr       */
+/*   Created: 2026/03/30 20:43:50 by cdric.b           #+#    #+#             */
+/*   Updated: 2026/03/30 20:44:04 by cdric.b          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libip.h"
 
-void	ft_print_bit_32(int n)
+uint16_t ft_htons_v1(uint16_t port)
 {
-	int		bit;
-	char	c;
+    uint16_t p3;
 
-	bit = 31;
-	while (bit >= 0)
-	{
-		if((bit + 1) % 8 == 0)
-			write(1, " ", 1);
-		c = ((n >> bit) & 1) + '0';
-		write(1, &c, 1);
-		bit--;
-	}
-	write(1, "\n", 1);
+    p3 = 0;
+    p3 |= port >> 8;
+    p3 |= port << 8;
+    return (p3);
+}
+
+uint16_t ft_htons_v2(uint16_t port)
+{
+    return ((port >> 8) | (port << 8));
 }

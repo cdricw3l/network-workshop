@@ -37,6 +37,16 @@ sin_addr: structure qui contient l'adresse sous la forme d'un entier.
 ### les fonction
 
 ```
+
+inet_pton(AF_INET, "216.58.192.3", &(sa.sin_addr));
+
+```
+inet_pton convertie une adresse ip (ipv4 ou ipv6) du format string vers le format __uint32_t.
+Elle prend en parametre la famille de protocol d'adresse IP, l'adresse ip au format string et un pointeur vers une structure in_addr (ipv4) ou in6_addr (ipv6). "It returns 1 if the string was successfully interpreted, or 0 if the string is invalid." (man inet_pton).
+
+
+
+```
 uint16_t htons(uint16_t hostshort);
 
 ````
@@ -44,3 +54,6 @@ htonl prend en parametre et retourne un uint16_t. La valeur max d'un uint16_t es
 La fonction inverse les deux octets de la valeur passée en parametre qui correspond au port auquel on veut ce connecter.
 
 00000000 01011010 -> sortie_source -> entré_dest -> 01011010 00000000
+
+
+8 16 24 32

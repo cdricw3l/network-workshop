@@ -9,6 +9,7 @@
 #include <arpa/inet.h>
 #include <assert.h>
 #include <string.h>
+#include <limits.h>
 #include "../libft/libft.h"
 
 #define ALL       0
@@ -20,6 +21,11 @@
 #define LOW 0
 #define UP 1
 
+
+uint16_t ft_htons_v2(uint16_t port);
+uint16_t ft_htons_v1(uint16_t port);
+
+int ft_inet_pton(int familly, char *addr_str, struct in_addr *addr);
 
 
 
