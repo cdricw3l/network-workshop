@@ -26,7 +26,7 @@ re: fclean $(NAME) r
 git: fclean
 	git add .
 	git commit -m $(GCOM)
-	git push origin main
+	git push $(shell git branch --show-current)
 
 lib:
 	cd libft && make bonus && make clean
