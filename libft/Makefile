@@ -92,7 +92,7 @@ fclean: clean
 	rm -f ${NAME} 
 	rm -f ${NAME} 
 
-re: fclean ${NAME}
+re: fclean bonus
 
 # test
 r:

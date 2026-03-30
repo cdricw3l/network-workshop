@@ -9,38 +9,38 @@ A l'aide de mes compétences techniques en réseau et systèmes et programmation
 Je vais effectuer une reconnaissance active et passive du réseau pour obtenir un aperçu global de son architecture et de ses équipements au travers l'envoi de paquet d'apres les differente couche de reseau analysé.
 
 
-## Outils 1: générateur d'adresse ip.
+## Exploration
+
+### les sturctures:
+
+La structure pour travailler avec des adresses ipv4 est la structure sockaddr_in
 
 ```
-uint32_t *gnr_range_ip(int network_type, const char *ip_start, const char *ip_end, uint32_t *size);
+    struct sockaddr_in {
 
-```
+        sa_family_t    sin_family; 
+        in_port_t      sin_port;
+        struct in_addr sin_addr;
+    };
 
-La fonction *gnr_range_ip genere un range d'ip destination pret à être utilisé dans les header ip.
-
-ip_start et ip_end doivent être égal à NULL si network_type != CUSTOM 
-
-Un pointeur size est passé en argument et retourne la taille du reseau.
-
-/*
-    les reseaux privées sont defini d'apres la rfc 1918
-
-    FLAGS
-
-    PRIVATE_1       10.255.255.255  (10/8 prefix)
-    PRIVATE_2       172.31.255.255  (172.16/12 prefix)
-    PRIVATE_3       192.168.255.255 (192.168/16 prefix)
-    ALL             0.0.0.0         (0/0 prefix)
-    CUSTOM          plage personalisé
-
-*/
-
-
-## Outils 2: convertissseur decimal to hex (peu utile dans le cadre de la creation de header, mais intéressant à maitriser).
-
-
-```
-char        *decimal_to_hex(size_t n, int up);
+    struct in_addr {
+        uint32_t       s_addr;
+    };
 
 ```
 
+sin_family: famille de protocol d'adresse IP. Dans le cas de sockaddr_in la famille est toujour ipv4 soit : AF_INET.
+sin_port: le port auquel nous souhaitons nous connecter. Attention à bien utiliser htonl.
+sin_addr: structure qui contient l'adresse sous la forme d'un entier.
+
+
+### les fonction
+
+```
+uint16_t htons(uint16_t hostshort);
+
+````
+htonl prend en parametre et retourne un uint16_t. La valeur max d'un uint16_t est UINT16_MAX soit 65535.
+La fonction inverse les deux octets de la valeur passée en parametre qui correspond au port auquel on veut ce connecter.
+
+00000000 01011010 -> sortie_source -> entré_dest -> 01011010 00000000

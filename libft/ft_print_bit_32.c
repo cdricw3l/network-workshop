@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_bit_32.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cw3l <cw3l@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cdric.b <cdric.b@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:50:44 by cw3l              #+#    #+#             */
-/*   Updated: 2024/12/13 10:05:19 by cw3l             ###   ########.fr       */
+/*   Updated: 2026/03/30 11:41:12 by cdric.b          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_print_bit_16(int n)
+void	ft_print_bit_32(int n)
 {
 	int		bit;
 	char	c;
@@ -20,6 +20,8 @@ void	ft_print_bit_16(int n)
 	bit = 31;
 	while (bit >= 0)
 	{
+		if(bit == 15)
+			write(1, " ", 1);
 		c = ((n >> bit) & 1) + '0';
 		write(1, &c, 1);
 		bit--;

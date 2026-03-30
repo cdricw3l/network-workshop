@@ -1,10 +1,8 @@
 NAME=workshop
-CC= c++
-GFLAGS= -Werror -Wextra -Wall
+CC= clang
+GFLAGS= -Werror -Wextra -Wall -g
 LIB= 	-Llibft -lft
-SRCS= 	src/ft_ip.cpp \
-		src/main.cpp	\
-		src/ft_decimal_to_hex.cpp
+SRCS= 	$(wildcard src/*.c)
 
 SRCS_OBJ= $(SRCS:.cpp=.o)
 GCOM="default commit message"
@@ -14,11 +12,21 @@ $(NAME): $(SRCS_OBJ) $(LIBFT_DIR)
 
 clean:
 	rm -f src/*.o
+	rm -rf *.dSYM
 
 fclean: clean
 	rm -f $(NAME)
+r:
+	./$(NAME)
+
+re: fclean $(NAME) r
+
+
 
 git: fclean
 	git add .
 	git commit -m $(GCOM)
 	git push origin main
+
+lib:
+	cd libft && make bonus && make clean
