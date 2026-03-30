@@ -21,4 +21,4 @@ fclean: clean
 git: fclean
 	git add .
 	git commit -m $(GCOM)
-	git push origin main
+	git push origin $(shell git branch --show-current)
