@@ -1,5 +1,6 @@
 NAME=workshop
 CC= clang
+#GFLAGS= -Werror -Wextra -Wall -g
 GFLAGS= -Werror -Wextra -Wall -g
 LIB= 	-Llibft -lft
 SRCS= 	$(wildcard src/*.c)

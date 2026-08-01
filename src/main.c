@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 10:17:02 by cdric.b           #+#    #+#             */
-/*   Updated: 2026/08/01 22:14:15 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/08/01 23:18:10 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,12 @@ void ft_inet_pton_assert(void)
 
 void ft_inet_addr_assert(void)
 {
-    printf("voici %u and %u\n", ft_inet_addr("192.168.0.0") , inet_addr("192.168.0.0"));
-    printf("voici %u and %u\n", ft_inet_addr("192.168.0.1") , inet_addr("192.168.0.1"));
-    printf("voici %u and %u\n", ft_inet_addr("192.168.0.2") , inet_addr("192.168.0.2"));
-    printf("voici %u and %u\n", ft_inet_addr("192.168.0.255") , inet_addr("192.168.0.255"));
+
     assert(ft_inet_addr("192.168.0.0") == inet_addr("192.168.0.0"));
     assert(ft_inet_addr("192.168.0.255") == inet_addr("192.168.0.255"));
 }
 
-/*
-    les reseaux privées sont defini d'apres la rfc 1918
 
-    PRIVATE_1       10.255.255.255  (10/8 prefix)
-    PRIVATE_2       172.31.255.255  (172.16/12 prefix)
-    PRIVATE_3       192.168.255.255 (192.168/16 prefix)
-    ALL             0.0.0.0         (0/0 prefix)
-    CUSTOM          plage personalisé
-*/
 
 
 
@@ -58,8 +47,23 @@ void ft_inet_addr_assert(void)
 
 int main(void)
 {
+
     ft_inet_addr_assert();
     //ft_inet_pton_assert();
+
+    t_ip_range start;
+    t_ip_range end;
+
+    start.a = 10;
+    start.b = 12;
+    start.c = 0;
+    start.d = 0;
     
+    end.a = 10;
+    end.b = 12;
+    end.c = 255;
+    end.d = 255;
+
+    generate_ipv4_range(start, end, 12);
     return (0);
 }

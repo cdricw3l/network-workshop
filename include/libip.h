@@ -42,6 +42,7 @@ uint16_t ft_htons_v1(uint16_t port);
 int	   ipv4_value_check(char **str);
 int      ft_inet_pton(int familly, char *addr_str, struct in_addr *addr);
 uint32_t ft_inet_addr(char *addr_str);
+uint32_t *generate_ipv4_range(t_ip_range start, t_ip_range end, int cidr);
 
 
 
