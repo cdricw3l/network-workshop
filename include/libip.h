@@ -27,14 +27,21 @@
 
 typedef struct s_ip_range
 {
-   uint32_t start;
+   uint8_t a;
+   uint8_t b;
+   uint8_t c;
+   uint8_t d;
 
 } t_ip_range;
 
 uint16_t ft_htons_v2(uint16_t port);
 uint16_t ft_htons_v1(uint16_t port);
 
-int ft_inet_pton(int familly, char *addr_str, struct in_addr *addr);
+/* utils */
+
+int	   ipv4_value_check(char **str);
+int      ft_inet_pton(int familly, char *addr_str, struct in_addr *addr);
+uint32_t ft_inet_addr(char *addr_str);
 
 
 

@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_inet_pton.c                                     :+:      :+:    :+:   */
+/*   ft_inet_addr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/30 20:44:28 by cdric.b           #+#    #+#             */
-/*   Updated: 2026/08/01 21:59:10 by cebouhad         ###   ########.fr       */
+/*   Created: 2026/08/01 21:54:24 by cebouhad          #+#    #+#             */
+/*   Updated: 2026/08/01 22:06:08 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libip.h"
 
-static int	get_ipv4_pton(char *addr_str, struct in_addr *addr)
-{
-	int		len;
-	char	**split;
 
+static in_addr_t get_ipv4_addr(char *addr_str)
+{
+	int		    len;
+	char	    **split;
+    in_addr_t   addr;
+    
 	/* split the ip string with the dot delimiter*/
 	split = ft_split(addr_str, '.');
 	if (!split)
 	{
 		write(STDERR_FILENO, "Split creation error\n", ft_strlen("Split creation error\n"));
-		return (ERR);
+		return (-1);
 	}
 	/* check the forma of every split part */
 	len = ipv4_value_check(split);
@@ -31,9 +33,9 @@ static int	get_ipv4_pton(char *addr_str, struct in_addr *addr)
 	{
 		write(STDERR_FILENO, "Wrong format address\n", ft_strlen("Wrong format address\n"));
 		ft_split_clean(&split);
-		return (ERR);
+		return (-1);
 	}
-	ft_bzero(addr, sizeof(struct in_addr));
+    addr = 0;
 	while (len >= 0)
 	{
 		//printf("addr: %d split: %d\n",addr->s_addr , ft_atoi(split[len]));
@@ -48,22 +50,20 @@ static int	get_ipv4_pton(char *addr_str, struct in_addr *addr)
 			after the injection we can decale bit from 8 to the left
 			exemple 00000000 00000000 00000000 00001010 << 8 = 00000000 00000000 00001010 00000000  
 		*/
-		addr->s_addr |= ft_atoi(split[len--]);
+		addr |= ft_atoi(split[len--]);
 		//ft_print_bit_32(addr->s_addr);
 		if (len >= 0)
-			addr->s_addr = addr->s_addr << 8;
+			addr = addr << 8;
 	}
 	ft_split_clean(&split);
-	return (OK);
+	return (addr);
 }
 
 /*
 	convert ip string format to an uint32 value;
 */
-int	ft_inet_pton(int familly, char *addr_str, struct in_addr *addr)
+in_addr_t ft_inet_addr(char *addr_str)
 {
 	/* convert ipv4 to uint32*/
-	if (familly == AF_INET)
-		return (get_ipv4_pton(addr_str, addr));
-	return (OK);
+	return (get_ipv4_addr(addr_str));
 }
