@@ -6,7 +6,7 @@
 /*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 10:17:02 by cdric.b           #+#    #+#             */
-/*   Updated: 2026/08/01 21:13:52 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/08/01 21:44:24 by cebouhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,14 @@ int main(void)
 {
     ft_inet_pton_assert();
     generate_range_ip(PRIVATE_1);
-    
+
+    in_addr_t add;
+    struct in_addr a;
+
+    add = inet_addr("192.168.1.1");
+    ft_inet_pton(AF_INET, "192.168.1.1", &a);
+    printf("A: %d\n", add);
+    printf("A: %d\n", a.s_addr);
+
     return (0);
 }

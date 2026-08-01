@@ -27,10 +27,7 @@
 
 typedef struct s_ip_range
 {
-    int a;
-    int b;
-    int c;
-    int d;
+   uint32_t start;
 
 } t_ip_range;
 
