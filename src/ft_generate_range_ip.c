@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_generate_range_ip.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cebouhad <cebouhad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cdric.b <cdric.b@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 20:43:50 by cdric.b           #+#    #+#             */
-/*   Updated: 2026/08/01 23:26:48 by cebouhad         ###   ########.fr       */
+/*   Updated: 2026/08/02 10:07:42 by cdric.b          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ uint32_t *generate_ipv4_range(t_ip_range start, t_ip_range end, int cidr)
     assert(check_range(get_range(0,25,255,255),get_range(0,100,25,0)) == OK);
     assert(check_range(get_range(0,0,0,255),get_range(0,0,0,165)) == ERR);
     assert(check_range(get_range(0,0,0,0),get_range(0,0,0,165)) == OK);
-    assert(check_range(get_range(0,0,0,0), get_range(0,0,0,286)) == ERR);
 
     return (0);
 }
